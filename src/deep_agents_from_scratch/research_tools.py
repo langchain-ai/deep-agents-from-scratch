@@ -90,6 +90,7 @@ def summarize_webpage_content(webpage_content: str) -> Summary:
             summary=webpage_content[:1000] + "..." if len(webpage_content) > 1000 else webpage_content
         )
 
+
 def process_search_results(results: dict) -> list[dict]:
     """Process search results by summarizing content where available.
 
@@ -101,27 +102,35 @@ def process_search_results(results: dict) -> list[dict]:
     """
     processed_results = []
 
-    # Create a client for HTTP requests
-    HTTPX_CLIENT = httpx.Client()
+    # Create a client for HTTP requests with timeout
+    HTTPX_CLIENT = httpx.Client(timeout=30.0)  # Add 30 second timeout
 
     for result in results.get('results', []):
 
         # Get url 
         url = result['url']
 
-        # Read url
-        response = HTTPX_CLIENT.get(url)
+        # Read url with timeout and error handling
+        try:
+            response = HTTPX_CLIENT.get(url)
 
-        if response.status_code == 200:
-            # Convert HTML to markdown
-            raw_content = markdownify(response.text)
-            summary_obj = summarize_webpage_content(raw_content)
-        else:
-            # Use Tavily's generated summary
+            if response.status_code == 200:
+                # Convert HTML to markdown
+                raw_content = markdownify(response.text)
+                summary_obj = summarize_webpage_content(raw_content)
+            else:
+                # Use Tavily's generated summary
+                raw_content = result.get('raw_content', '')
+                summary_obj = Summary(
+                    filename="URL_error.md",
+                    summary=result.get('content', 'Error reading URL; try another search.')
+                )
+        except (httpx.TimeoutException, httpx.RequestError) as e:
+            # Handle timeout or connection errors gracefully
             raw_content = result.get('raw_content', '')
             summary_obj = Summary(
-                filename="URL_error.md",
-                summary=result.get('content', 'Error reading URL; try another search.')
+                filename="connection_error.md",
+                summary=result.get('content', f'Could not fetch URL (timeout/connection error). Try another search.')
             )
 
         # uniquify file names
@@ -138,6 +147,7 @@ def process_search_results(results: dict) -> list[dict]:
         })
 
     return processed_results
+
 
 @tool(parse_docstring=True)
 def tavily_search(

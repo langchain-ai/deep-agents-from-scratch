@@ -1,0 +1,15 @@
+langgraph: 1.0.3
+langchain: 1.0.7
+langchain-openai: 1.0.3
+langchain-anthropic: 1.0.4
+langchain_community: 0.4.1
+langchain_tavily: 0.2.13
+langchain_mcp_adapters: 0.1.13
+pydantic: 2.12.4
+rich: 14.2.0
+jupyter: 1.1.1
+ipykernel: 7.1.0
+tavily-python: 0.7.13
+httpx: 0.28.1
+markdownify: 1.2.2
+deepagents: 0.2.7

@@ -2,7 +2,7 @@
 name = "deep_agents_from_scratch"
 version = "0.1.0"
 description = "Build a deep agent from scratch"
-requires-python = ">=3.11"
+requires-python = ">=3.11, <3.14"
 dependencies = [
 "langgraph>=0.6.4",
 "langchain>=0.3.0",

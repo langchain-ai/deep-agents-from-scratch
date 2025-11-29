@@ -10,7 +10,9 @@ from typing_extensions import TypedDict
 
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import BaseTool, InjectedToolCallId, tool
-from langgraph.prebuilt import InjectedState, create_react_agent
+from langgraph.prebuilt import InjectedState  # updated 1.0
+from langchain.agents import create_agent  # updated 1.0
+
 from langgraph.types import Command
 
 from deep_agents_from_scratch.prompts import TASK_DESCRIPTION_PREFIX
@@ -59,8 +61,8 @@ def _create_task_tool(tools, subagents: list[SubAgent], model, state_schema):
         else:
             # Default to all tools
             _tools = tools
-        agents[_agent["name"]] = create_react_agent(
-            model, prompt=_agent["prompt"], tools=_tools, state_schema=state_schema
+        agents[_agent["name"]] = create_agent(   # updated 1.0
+            model, system_prompt=_agent["prompt"], tools=_tools, state_schema=state_schema
         )
 
     # Generate description of available sub-agents for the tool description

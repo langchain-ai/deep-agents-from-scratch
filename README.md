@@ -30,7 +30,7 @@ export PATH="/Users/$USER/.local/bin:$PATH"
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/langchain-ai/deep_agents_from_scratch
+git clone https://github.com/langchain-ai/deep-agents-from-scratch.git
 cd deep_agents_from_scratch
 ```
 

@@ -79,7 +79,7 @@ def write_file(
         file_path: Path where the file should be created/updated
         content: Content to write to the file
         state: Agent state containing virtual filesystem (injected in tool node)
-        tool_call_id: Tool call identifier for message response
+        tool_call_id: Tool call identifier for message response (injected in tool node)
 
     Returns:
         Command to update agent state with new file content
