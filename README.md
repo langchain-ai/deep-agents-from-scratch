@@ -50,8 +50,15 @@ Add your API keys to the `.env` file:
 # Required for research agents with external search
 TAVILY_API_KEY=your_tavily_api_key_here
 
-# Required for model usage
+# Required for model usage - choose one or more:
+# Google GenAI (recommended for getting started)
+GOOGLE_API_KEY=your_google_api_key_here
+
+# OR Anthropic
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+# OR OpenAI
+OPENAI_API_KEY=your_openai_api_key_here
 
 # Optional: For evaluation and tracing
 LANGSMITH_API_KEY=your_langsmith_api_key_here
@@ -59,7 +66,44 @@ LANGSMITH_TRACING=true
 LANGSMITH_PROJECT=deep-agents-from-scratch
 ```
 
-4. Run notebooks or code using uv:
+**Note on Model Providers:**
+- **Google GenAI**: Easiest to get started with. Get a free API key from [Google AI Studio](https://aistudio.google.com/app/apikey). Works with models like `gemini-2.5-flash` and `gemini-2.5-flash-lite`.
+- **Anthropic**: Requires API key from [Anthropic Console](https://console.anthropic.com/). Works with Claude models.
+- **OpenAI**: Requires API key from [OpenAI Platform](https://platform.openai.com/). Works with GPT models.
+
+4. Using different models in notebooks:
+
+**Google GenAI (Gemini):**
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+model = ChatGoogleGenerativeAI(
+    model="models/gemini-2.5-flash",  # or "models/gemini-1.5-pro"
+    temperature=0.0
+)
+```
+
+**Anthropic (Claude):**
+```python
+from langchain_anthropic import ChatAnthropic
+
+model = ChatAnthropic(
+    model="claude-3-5-sonnet-20241022",
+    temperature=0.0
+)
+```
+
+**OpenAI (GPT):**
+```python
+from langchain_openai import ChatOpenAI
+
+model = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0.0
+)
+```
+
+5. Run notebooks or code using uv:
 ```bash
 # Run Jupyter notebooks directly
 uv run jupyter notebook

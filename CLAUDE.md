@@ -99,13 +99,55 @@ Create `.env` file in project root with required API keys:
 # Required for research agents with external search
 TAVILY_API_KEY=your_tavily_api_key_here
 
-# Required for model usage  
+# Required for model usage - choose one or more:
+# Google GenAI (recommended for getting started)
+GOOGLE_API_KEY=your_google_api_key_here
+
+# OR Anthropic
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+# OR OpenAI
+OPENAI_API_KEY=your_openai_api_key_here
 
 # Optional: For evaluation and tracing
 LANGSMITH_API_KEY=your_langsmith_api_key_here
 LANGSMITH_TRACING=true
 LANGSMITH_PROJECT=deep-agents-from-scratch
+```
+
+## Model Usage
+
+The notebooks support multiple LLM providers. The project includes `langchain-google-genai` for Google's Gemini models:
+
+**Google GenAI (Gemini) - Recommended:**
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+model = ChatGoogleGenerativeAI(
+    model="models/gemini-1.5-flash",  # Fast and cost-effective
+    temperature=0.0
+)
+# Alternative: "models/gemini-1.5-pro" for more capable reasoning
+```
+
+**Anthropic (Claude):**
+```python
+from langchain_anthropic import ChatAnthropic
+
+model = ChatAnthropic(
+    model="claude-3-5-sonnet-20241022",
+    temperature=0.0
+)
+```
+
+**OpenAI (GPT):**
+```python
+from langchain_openai import ChatOpenAI
+
+model = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0.0
+)
 ```
 
 ## Testing
@@ -120,5 +162,6 @@ No specific test framework is configured. Test agents by:
 - Virtual file system is ephemeral - exists only during agent execution
 - TODO tool should limit to ONE task in_progress at a time
 - File edit operations require exact string matching
-- Agents use Claude Sonnet 4 model by default
+- Agents can use Google Gemini, Claude, or GPT models (examples use Google Gemini for accessibility)
 - Rich formatting utilities in `notebooks/utils.py` for message display
+- Notebook `0_create_agent.ipynb` demonstrates basic agent setup with Google Gemini models
