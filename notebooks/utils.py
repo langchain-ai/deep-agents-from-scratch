@@ -52,7 +52,7 @@ def format_messages(messages):
 
         if msg_type == "Human":
             console.print(Panel(content, title="🧑 Human", border_style="blue"))
-        elif msg_type == "Ai":
+        elif msg_type == "AI":
             console.print(Panel(content, title="🤖 Assistant", border_style="green"))
         elif msg_type == "Tool":
             console.print(Panel(content, title="🔧 Tool Output", border_style="yellow"))
