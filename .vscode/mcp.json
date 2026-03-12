@@ -1,0 +1,9 @@
+{
+	"servers": {
+		"Docs by LangChain": {
+			"url": "https://docs.langchain.com/mcp",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}
