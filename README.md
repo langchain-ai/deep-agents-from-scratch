@@ -77,7 +77,7 @@ This repository contains five progressive notebooks that teach you to build adva
 Learn how to use the create_agent component. This component,
 - implements a ReAct (Reason - Act) loop that forms the foundation for many agents.
 - is easy to use and quick to set up.
-- serves as the
+- serves as the basis for the following lessons.
 
 ### `1_todo.ipynb` - Task Planning Foundations
 Learn to implement structured task planning using TODO lists. This notebook introduces:
