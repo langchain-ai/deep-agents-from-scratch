@@ -31,7 +31,7 @@ export PATH="/Users/$USER/.local/bin:$PATH"
 1. Clone the repository:
 ```bash
 git clone https://github.com/langchain-ai/deep-agents-from-scratch.git
-cd deep_agents_from_scratch
+cd deep-agents-from-scratch
 ```
 
 2. Install the package and dependencies (this automatically creates and manages the virtual environment):
